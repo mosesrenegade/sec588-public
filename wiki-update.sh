@@ -2,11 +2,9 @@
 
 function UPDATE_WIKI () {
     curl -o /tmp/wiki-update.sh https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/wiki-update.sh
-    sha256sum /opt/wiki/wiki-update.sh | awk '{ print $1 }' > /opt/wiki/wiki-update.sh.sha256
-    sha256sum /tmp/wiki-update.sh | awk '{ print $1 }' > /tmp/wiki-update.sh.sha256
-    if ! cmp --silent "/opt/wiki/wiki-update.sh.sha256" "/tmp/wiki-update.sh.sha256"
+    if ! cmp --silent "/tmp/wiki-update.sh" "/opt/wiki/wiki-update.sh"
     then
-      cp /opt/wiki/wiki-update.sh /opt/wiki/wiki-update.old
+      mv /opt/wiki/wiki-update.sh /opt/wiki/wiki-update.old
       mv /tmp/wiki-update.sh /opt/wiki/wiki-update.sh
       chmod a+x /opt/wiki/wiki-update.sh
       echo "We have had an update to the updater, we are exiting and will require you to RERUN the application"
