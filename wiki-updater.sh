@@ -2,6 +2,8 @@
 
 function UPDATE_WIKI () {\
     cp ./wiki-updater.sh /wiki-updater.old
+    curl -o ./wiki-updater.sh https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/wiki-updater.sh
+    echo "You may have to run this application two times to update the shell script"
     cd /opt/wiki/sec588-labs-e01
     git reset --hard
     git pull
