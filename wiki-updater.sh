@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function UPDATE_WIKI () {
-    cp ./wiki-updater.sh /wiki-updater.old
+    sudo cp ./wiki-updater.sh /wiki-updater.old
     curl -o ./wiki-updater.sh https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/wiki-updater.sh
     echo "You may have to run this application two times to update the shell script"
     cd /opt/wiki/sec588-labs-e01
@@ -11,7 +11,12 @@ function UPDATE_WIKI () {
 }
 
 function UPDATE_ENV() {
-    c
+    FILE=/home/sec588/.bashrc
+    CLASS=test
+    STUDENT=1
+    if [ ! -z $(grep "$CLASS" "$FILE") ]
+        then echo "FOUND"
+    fi
 
 }
 function HELP () {
