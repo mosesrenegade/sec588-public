@@ -9,7 +9,7 @@ function UPDATE_WIKI () {
       cp /opt/wiki/wiki-updater.sh /opt/wiki/wiki-updater.old
       mv /tmp/wiki-updater.sh /opt/wiki/wiki-updater.sh
       echo "We have had an update to the updater, we are exiting and will require you to RERUN the application"
-      exit(1)
+      exit 1
     fi
     cd /opt/wiki/sec588-labs-e01
     git reset --hard
