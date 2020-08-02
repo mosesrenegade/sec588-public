@@ -39,6 +39,15 @@ function HELP () {
     echo "pass lab 1.5 to update your local wiki! Have fun exploring"
 }
 
+echo "What is your class name? It will be found in the MyLabs portal,"
+echo "for example if your WIKI URL is http://wiki.first-name.sec588.net "
+read -p "then your class name is first-name : " CLASS
+
+read -p "What is your student number? " STUDENT
+UPDATE_ENV
+
+echo "We have added new environment variables you should close all terminal windows and open them!"
+
 echo "Have you done Lab 1.5 yet?"
 select yn in "Yes" "No"; do
     case $yn in
@@ -47,9 +56,3 @@ select yn in "Yes" "No"; do
         * ) "Please answer yes or no.";;
     esac
 done
-
-read -p 'What is your class name? It will be found in the MyLabs portal: ' CLASS
-read -p 'What is your student number? ' STUDENT
-UPDATE_ENV
-
-echo "We have added new environment variables you should close all terminal windows and open them!"
