@@ -1,4 +1,5 @@
 #!/bin/bash
+VER=g01
 
 function UPDATE_WIKI () {
     curl -o /tmp/wiki-update.sh https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/wiki-update.sh
@@ -10,7 +11,7 @@ function UPDATE_WIKI () {
       echo "We have had an update to the updater, we are exiting and will require you to RERUN the application"
       exit 1
     fi
-    cd /opt/wiki/sec588-labs-e01
+    cd /opt/wiki/sec588-labs-$VER
     git reset --hard
     git pull
     sudo cp -r . /var/www/html/wiki
@@ -20,15 +21,11 @@ function UPDATE_ENV() {
     FILE="/home/sec588/.bashrc"
     if grep -q "CLASS" "$FILE"
     then
-        C_OLD=$(grep "CLASS" $FILE)
-        echo $C_OLD
-        sed -i "s/$C_OLD/export CLASS=\"$CLASS\"/g" $FILE 
+        sed -i '/CLASS=/d' $FILE
     fi
     if grep -q "STUDENT" "$FILE"
     then
-        S_OLD=$(grep "STUDENT" $FILE)
-        echo $S_OLD
-        sed -i "s/$S_OLD/export STUDENT=\"student$STUDENT\"/g" $FILE 
+        sed -i '/STUDENT=/d' $FILE
     fi
     echo "export CLASS=\"$CLASS\"" >> ~/.bashrc
     echo "export STUDENT=\"student$STUDENT\"" >> ~/.bashrc
@@ -47,12 +44,3 @@ read -p "What is your student number? " STUDENT
 UPDATE_ENV
 
 echo "We have added new environment variables you should close all terminal windows and open them!"
-
-echo "Have you done Lab 1.5 yet?"
-select yn in "Yes" "No"; do
-    case $yn in
-        [Yy]* ) UPDATE_WIKI;break;;
-        [Nn]* ) HELP; exit;;
-        * ) "Please answer yes or no.";;
-    esac
-done
