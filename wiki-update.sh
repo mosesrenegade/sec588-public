@@ -42,5 +42,6 @@ read -p "then your class name is first-name : " CLASS
 
 read -p "What is your student number? " STUDENT
 UPDATE_ENV
+UPDATE_WIKI
 
 echo "We have added new environment variables you should close all terminal windows and open them!"
