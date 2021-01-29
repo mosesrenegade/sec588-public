@@ -12,8 +12,11 @@ function UPDATE_WIKI () {
       exit 1
     fi
     cd /opt/wiki/sec588-labs-$VER
+    rm -Rf *.html
     git reset --hard
     git pull
+    sed -i "s/\$STUDENT/student$STUDENT/g" ./*.html
+    sed -i "s/\$CLASS/$CLASS/g" ./*.html
     sudo cp -r . /var/www/html/wiki
 }
 
