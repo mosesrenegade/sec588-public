@@ -14,7 +14,7 @@ function UPDATE_WIKI () {
     SSH_CONFIG="/home/sec588/.ssh/config"
     if grep -q "  #IdentityFile ~/.ssh/sec588-wiki-vm-keys" "$SSH_CONFIG"
     then
-        sed -i "s/  #IdentityFile ~\/.ssh\/sec588-wiki-vm-keys/  #IdentityFile ~\/.ssh\/sec588-wiki-vm-keys/g" "$SSH_CONFIG"
+        sed -i "s/  #IdentityFile ~\/.ssh\/sec588-wiki-vm-keys/  IdentityFile ~\/.ssh\/sec588-wiki-vm-keys/g" "$SSH_CONFIG"
     fi
     if grep -q "  IdentityFile /home/sec588/.ssh/day4" "$SSH_CONFIG"
     then
