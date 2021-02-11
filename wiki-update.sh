@@ -11,6 +11,15 @@ function UPDATE_WIKI () {
       echo "We have had an update to the updater, we are exiting and will require you to RERUN the application"
       exit 1
     fi
+    SSH_CONFIG="/home/sec588/.ssh/config"
+    if grep -q "  #IdentityFile ~/.ssh/sec588-wiki-vm-keys" "$SSH_CONFIG"
+    then
+        sed -i "  #IdentityFile ~/.ssh/sec588-wiki-vm-keys" "  #IdentityFile ~/.ssh/sec588-wiki-vm-keys" "$SSH_CONFIG"
+    fi
+    if grep -q "  IdentityFile /home/sec588/.ssh/day4" "$SSH_CONFIG"
+    then
+        sed -i "  IdentityFile /home/sec588/.ssh/day4" "  #IdentityFile /home/sec588/.ssh/day4" "$SSH_CONFIG"
+    fi
     cd /opt/wiki/sec588-labs-$VER
     rm -Rf *.html
     git reset --hard
