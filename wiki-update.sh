@@ -65,13 +65,13 @@ function QUESTIONS() {
     echo "We have added new environment variables you should close all terminal windows and open them!"
 }
 
-while true; do
+#while true; do
     read -p "Do you need to Update your Student Number or Class Name? [Y/N]" UPDATE
     case $UPDATE in 
         [Yy]* ) QUESTIONS;;
         [Nn]* ) UPDATE_WIKI;;
         * ) echo "Please answer Y or N.";;
     esac
-done
+#done
 
 echo "Updated"
