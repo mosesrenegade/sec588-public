@@ -58,7 +58,7 @@ function QUESTIONS() {
     echo "for example if your WIKI URL is http://wiki.first-name.sec588.net "
     read -p "then your class name is first-name : " CLASS
  
-    read -p "What is your student number? Numbers only please. " STUDENT
+    read -p "What is your student number? Numbers only please : " STUDENT
     UPDATE_ENV
     UPDATE_WIKI
     
