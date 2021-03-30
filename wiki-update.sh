@@ -74,4 +74,4 @@ while true; do
     esac
 done
 
-echo "Updated\!"
+echo "Updated"
