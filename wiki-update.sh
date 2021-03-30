@@ -31,6 +31,7 @@ function UPDATE_WIKI () {
 
 function UPDATE_ENV() {
     FILE="/home/sec588/.bashrc"
+    UA='"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36'"
     if grep -q "CLASS" "$FILE"
     then
         sed -i '/CLASS=/d' $FILE
@@ -38,6 +39,10 @@ function UPDATE_ENV() {
     if grep -q "STUDENT" "$FILE"
     then
         sed -i '/STUDENT=/d' $FILE
+    fi
+    if ! grep -q "UA=" "$FILE"
+    then
+        echo 'UA=$UA' "$FILE" 
     fi
     echo "export CLASS=\"$CLASS\"" >> ~/.bashrc
     echo "export STUDENT=\"student$STUDENT\"" >> ~/.bashrc
@@ -48,12 +53,25 @@ function HELP () {
     echo "pass lab 1.5 to update your local wiki! Have fun exploring"
 }
 
-echo "What is your class name? It will be found in the MyLabs portal,"
-echo "for example if your WIKI URL is http://wiki.first-name.sec588.net "
-read -p "then your class name is first-name : " CLASS
+function QUESTIONS() {
+    echo "What is your class name? It will be found in the MyLabs portal,"
+    echo "for example if your WIKI URL is http://wiki.first-name.sec588.net "
+    read -p "then your class name is first-name : " CLASS
+ 
+    read -p "What is your student number? Numbers only please. " STUDENT
+    UPDATE_ENV
+    UPDATE_WIKI
+    
+    echo "We have added new environment variables you should close all terminal windows and open them!"
+}
 
-read -p "What is your student number? " STUDENT
-UPDATE_ENV
-UPDATE_WIKI
+while true; do
+    read -p "Do you need to Update your Student Number or Class Name? [Y/N]" UPDATE
+    case $UPDATE in 
+        [Yy]* ) QUESTIONS;;
+        [Nn]* ) UPDATE_WIKI;;
+        * ) echo "Please answer Y or N.";;
+    esac
+done
 
-echo "We have added new environment variables you should close all terminal windows and open them!"
+echo "Updated!"
