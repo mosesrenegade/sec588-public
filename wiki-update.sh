@@ -31,7 +31,7 @@ function UPDATE_WIKI () {
 
 function UPDATE_ENV() {
     FILE="/home/sec588/.bashrc"
-    UA='"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"'
+    UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
     if grep -q "CLASS" "$FILE"
     then
         sed -i '/CLASS=/d' $FILE
@@ -40,12 +40,13 @@ function UPDATE_ENV() {
     then
         sed -i '/STUDENT=/d' $FILE
     fi
-    if ! grep -q "UA=" "$FILE"
+    if grep -q "UA" "$FILE"
     then
-        echo 'UA=$UA' "$FILE" 
+        sed -i '/UA=/d' $FILE
     fi
     echo "export CLASS=\"$CLASS\"" >> ~/.bashrc
     echo "export STUDENT=\"student$STUDENT\"" >> ~/.bashrc
+    echo "export UA=\"$UA\"" >> ~/.bashrc
 }
 
 function HELP () {
