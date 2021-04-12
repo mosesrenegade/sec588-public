@@ -1,6 +1,10 @@
 #!/bin/bash
 VER=g01
 
+function UPDATE_JOHN () {
+  # Only for G01
+}
+
 function UPDATE_WIKI () {
     curl -o /tmp/wiki-update.sh https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/wiki-update.sh
     if ! cmp --silent "/tmp/wiki-update.sh" "/opt/wiki/wiki-update.sh"
@@ -66,13 +70,11 @@ function QUESTIONS() {
     echo "We have added new environment variables you should close all terminal windows and open them!"
 }
 
-#while true; do
-    read -p "Do you need to Update your Student Number or Class Name? [Y/N]" UPDATE
-    case $UPDATE in 
-        [Yy]* ) QUESTIONS;;
-        [Nn]* ) UPDATE_WIKI;;
-        * ) echo "Please answer Y or N.";;
-    esac
-#done
+read -p "Do you need to Update your Student Number or Class Name? [Y/N]" UPDATE
+case $UPDATE in 
+    [Yy]* ) QUESTIONS;;
+    [Nn]* ) UPDATE_WIKI;;
+    * ) echo "Please answer Y or N.";;
+esac
 
 echo "Updated"
