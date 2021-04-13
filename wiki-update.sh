@@ -3,6 +3,14 @@ VER=g01
 
 function UPDATE_JOHN () {
   # Only for G01
+  if [ ! -f /opt/john/john.sh ]; then
+    curl https://media.githubusercontent.com/media/mosesrenegade/sec588-public/master/john.tar.gz --output /tmp/john.tar.gz
+    tar -vxzf /tmp/john.tar.gz 
+    sudo mv john /opt/john
+    sudo chown -R sec588:sec588 /opt/john
+    sudo ln -s /opt/john/john.sh /opt/bin/john
+    sudo apt remove john -y
+  fi
 }
 
 function UPDATE_WIKI () {
@@ -31,6 +39,7 @@ function UPDATE_WIKI () {
     sed -i "s/\$STUDENT/student$STUDENT/g" ./*.html
     sed -i "s/\$CLASS/$CLASS/g" ./*.html
     sudo cp -r . /var/www/html/wiki
+    UPDATE_JOHN
 }
 
 function UPDATE_ENV() {
