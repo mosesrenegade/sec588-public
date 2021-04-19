@@ -40,7 +40,7 @@ function UPDATE_WIKI () {
     fi
     if [ -z $CLASS ]
     then
-        CLASS=$(cat ~/.bashrc | grep CLASS | awk -F= '{ print $2 }' | awk -F\= '{ print $1}')
+        CLASS=$(cat ~/.bashrc | grep CLASS | awk -F= '{ print $2 }' | awk -F\= '{ print $1 }')
     fi
     if [ -z $STUDENT ]
     then
