@@ -1,9 +1,15 @@
 #!/bin/bash
 VER=g01
 
+if [ "$EUID" = 0 ]
+  then echo "Please don't run as root or sudo!"
+  exit
+fi
+
 function UPDATE_JOHN () {
   # Only for G01
-  if [ ! -f /opt/john/john.sh ]; then
+  if [ ! -f /opt/john/john.sh ]
+  then
     curl https://media.githubusercontent.com/media/mosesrenegade/sec588-public/master/john.tar.gz --output /tmp/john.tar.gz
     tar -vxzf /tmp/john.tar.gz 
     sudo mv john /opt/john
