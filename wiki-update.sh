@@ -75,8 +75,8 @@ function HELP () {
 
 function QUESTIONS() {
     echo "What is your class name? It will be found in the MyLabs portal,"
-    echo "for example if your WIKI URL is http://wiki.first-name.sec588.net "
-    read -p "then your class name is first-name : " CLASS
+    echo "Look for the targets range domain, example: first-name.sec588.net."
+    read -p "You woudl enter first-name in this prompt: " CLASS
  
     read -p "What is your student number? Numbers only please : " STUDENT
     UPDATE_ENV
