@@ -86,9 +86,9 @@ function UPDATE_ENV() {
     then
         sed -i '/UA=/d' $FILE
     fi
-    echo "export CLASS=\"$CLASS\"" >> ~/.bashrc
-    echo "export STUDENT=\"student$STUDENT\"" >> ~/.bashrc
-    echo "export UA=\"$UA\"" >> ~/.bashrc
+    echo "export CLASS=\"$CLASS\"" >> $FILE
+    echo "export STUDENT=\"$STUDENT\"" >> $FILE
+    echo "export UA=\"$UA\"" >> $FILE
 }
 
 function HELP () {
