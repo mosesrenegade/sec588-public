@@ -6,6 +6,16 @@ if [ "$EUID" = 0 ]
   exit
 fi
 
+function UPDATE_NGINX () {
+  curl -o /tmp/nginx-default-site https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/nginx-default-site
+  if ! cmp --silent "/tmp/nginx-default-site" "/etc/nginx/sites-enabled/default"
+  then
+    sudo mv /tmp/nginx-default-site /etc/nginx/sites-enabled/default
+    sudo systemctl restart nginx
+    echo "[+] Please close and open any web browsers as we have updated the nginx configuration"
+  fi
+}
+
 function UPDATE_JOHN () {
   # Only for G01
   if [ ! -f /opt/john/john.sh ]
@@ -77,22 +87,24 @@ function UPDATE_ENV() {
 }
 
 function HELP () {
-    echo "This course features a quest to update this wiki, you must"
-    echo "pass lab 1.5 to update your local wiki! Have fun exploring"
+    echo "[+] This course features a quest to update this wiki, you must"
+    echo "[+] pass lab 1.5 to update your local wiki! Have fun exploring"
 }
 
 function QUESTIONS() {
-    echo "What is your class name? It will be found in the MyLabs portal,"
-    echo "Look for the targets range domain, example: first-name.sec588.net."
+    echo "[+] What is your class name? It will be found in the MyLabs portal,"
+    echo "[+] Look for the targets range domain, example: first-name.sec588.net."
     read -p "You would enter first-name in this prompt: " CLASS
  
     read -p "What is your student number? Numbers only please : " STUDENT
     UPDATE_ENV
     UPDATE_WIKI
     
-    echo "We have added new environment variables you should close all terminal windows and open them!"
+    echo "[+] We have added new environment variables you should close all terminal windows and open them!"
 }
 
+echo "[+] Student Number currently set to $STUDENT"
+echo "[+] Class name currently set to $CLASS"
 read -p "Do you need to Update your Student Number or Class Name? [Y/N]" UPDATE
 case $UPDATE in 
     [Yy]* ) QUESTIONS;;
