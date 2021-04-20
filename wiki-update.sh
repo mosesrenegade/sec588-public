@@ -118,7 +118,7 @@ then
     QUESTIONS
 fi
 
-"[+] Student Number currently set to $STUDENT"
+echo "[+] Student Number currently set to $STUDENT"
 echo "[+] Class name currently set to $CLASS"
 read -p "Do you need to Update your Student Number or Class Name? [Y/N]" UPDATE
 case $UPDATE in 
