@@ -116,15 +116,15 @@ STUDENT=$(cat ~/.bashrc | grep STUDENT | awk -F= '{ print $2}')
 if [[ -z "$CLASS" || -z "$STUDENT" ]]
 then
     QUESTIONS
+else
+    echo "[+] Student Number currently set to $STUDENT"
+    echo "[+] Class name currently set to $CLASS"
+    read -p "Do you need to Update your Student Number or Class Name? [Y/N]" UPDATE
+    case $UPDATE in 
+        [Yy]* ) QUESTIONS;;
+        [Nn]* ) UPDATE_WIKI;;
+        * ) echo "Please answer Y or N.";;
+    esac
+
 fi
 
-echo "[+] Student Number currently set to $STUDENT"
-echo "[+] Class name currently set to $CLASS"
-read -p "Do you need to Update your Student Number or Class Name? [Y/N]" UPDATE
-case $UPDATE in 
-    [Yy]* ) QUESTIONS;;
-    [Nn]* ) UPDATE_WIKI;;
-    * ) echo "Please answer Y or N.";;
-esac
-
-echo "Updated"
