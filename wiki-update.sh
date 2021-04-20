@@ -50,8 +50,10 @@ function UPDATE_WIKI () {
     then
         sed -i "s/  IdentityFile \/home\/sec588\/.ssh\/day4/  #IdentityFile \/home\/sec588\/.ssh\/day4/g" "$SSH_CONFIG"
     fi
-    
-    sed -i "s/\$STUDENT/$STUDENT/g" ./*.html
+    cd /opt/wiki/sec588-labs-$VER
+    rm -Rf *.html
+    git reset --hard
+    git pull    sed -i "s/\$STUDENT/$STUDENT/g" ./*.html
     sed -i "s/\$CLASS/$CLASS/g" ./*.html
     sudo cp -r . /var/www/html/wiki
     UPDATE_JOHN
