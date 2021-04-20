@@ -54,7 +54,7 @@ function UPDATE_WIKI () {
     fi
     if [ -z $STUDENT ]
     then
-       STUDENT=$(cat ~/.bashrc | grep STUDENT | awk -F= '{ print $2}')
+       STUDENT=$(cat ~/.bashrc | grep STUDENT | awk -F= '{ print $2}' | sed -s 's/student//')
     fi
     cd /opt/wiki/sec588-labs-$VER
     rm -Rf *.html
