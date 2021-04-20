@@ -48,14 +48,7 @@ function UPDATE_WIKI () {
     then
         sed -i "s/  IdentityFile \/home\/sec588\/.ssh\/day4/  #IdentityFile \/home\/sec588\/.ssh\/day4/g" "$SSH_CONFIG"
     fi
-    #if [ -z $CLASS ]
-    #then
-    #    CLASS=$(cat ~/.bashrc | grep CLASS | awk -F= '{ print $2 }' | awk -F\= '{ print $1 }')
-    #fi
-    #if [ -z $STUDENT ]
-    #then
-    #   STUDENT=$(cat ~/.bashrc | grep STUDENT | awk -F= '{ print $2}' | sed -s 's/student//')
-    #fi
+    
     cd /opt/wiki/sec588-labs-$VER
     rm -Rf *.html
     git reset --hard
@@ -110,8 +103,8 @@ function QUESTIONS () {
     echo "[+] We have added new environment variables you should close all terminal windows and open them!"
 }
 
-CLASS=$(cat ~/.bashrc | grep CLASS | awk -F= '{ print $2 }' | awk -F\= '{ print $1 }')
-STUDENT=$(cat ~/.bashrc | grep STUDENT | awk -F= '{ print $2}')
+CLASS=$(if [ -f "~/.bashrc" ]; then cat ~/.bashrc | grep CLASS | awk -F= '{ print $2 }' | awk -F\= '{ print $1 }'; fi )
+STUDENT=$(if [ -f "~/.bashrc" ]; then cat ~/.bashrc | grep STUDENT | awk -F= '{ print $2}'; fi )
 
 if [[ -z "$CLASS" || -z "$STUDENT" ]]
 then
