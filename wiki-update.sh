@@ -60,10 +60,10 @@ function UPDATE_WIKI () {
     rm -Rf *.html
     git reset --hard
     git pull
-    if  [[ ! -z $STUNUM ]] 
-    then
-        STUDENT=student$STUNUM
-    fi
+    #if  [[ ! -z $STUNUM ]] 
+    #then
+    #    STUDENT=student$STUNUM
+    #fi
     sed -i "s/\$STUDENT/$STUDENT/g" ./*.html
     sed -i "s/\$CLASS/$CLASS/g" ./*.html
     sudo cp -r . /var/www/html/wiki
@@ -103,7 +103,7 @@ function QUESTIONS () {
  
     read -p "What is your student number? Numbers only please : " STUNUM
     
-    #STUDENT=student$STUNUM
+    STUDENT=student$STUNUM
     UPDATE_ENV
     UPDATE_WIKI
     
@@ -111,7 +111,7 @@ function QUESTIONS () {
 }
 
 CLASS=$(cat ~/.bashrc | grep CLASS | awk -F= '{ print $2 }' | awk -F\= '{ print $1 }')
-STUDENT=$(cat ~/.bashrc | grep STUDENT | awk -F= '{ print $2}' | sed -s 's/student//')
+STUDENT=$(cat ~/.bashrc | grep STUDENT | awk -F= '{ print $2}')
 
 if [[ -z "$CLASS" || -z "$STUDENT" ]]
 then
