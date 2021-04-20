@@ -62,7 +62,7 @@ function UPDATE_WIKI () {
 }
 
 function UPDATE_ENV() {
-    if [ -f "$FILE"]
+    if [ -f "$FILE" ]
     then
       if grep -q "CLASS" "$FILE"
       then
