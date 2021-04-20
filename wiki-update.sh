@@ -48,14 +48,14 @@ function UPDATE_WIKI () {
     then
         sed -i "s/  IdentityFile \/home\/sec588\/.ssh\/day4/  #IdentityFile \/home\/sec588\/.ssh\/day4/g" "$SSH_CONFIG"
     fi
-    if [ -z $CLASS ]
-    then
-        CLASS=$(cat ~/.bashrc | grep CLASS | awk -F= '{ print $2 }' | awk -F\= '{ print $1 }')
-    fi
-    if [ -z $STUDENT ]
-    then
-       STUDENT=$(cat ~/.bashrc | grep STUDENT | awk -F= '{ print $2}' | sed -s 's/student//')
-    fi
+    #if [ -z $CLASS ]
+    #then
+    #    CLASS=$(cat ~/.bashrc | grep CLASS | awk -F= '{ print $2 }' | awk -F\= '{ print $1 }')
+    #fi
+    #if [ -z $STUDENT ]
+    #then
+    #   STUDENT=$(cat ~/.bashrc | grep STUDENT | awk -F= '{ print $2}' | sed -s 's/student//')
+    #fi
     cd /opt/wiki/sec588-labs-$VER
     rm -Rf *.html
     git reset --hard
@@ -96,21 +96,29 @@ function HELP () {
     echo "[+] pass lab 1.5 to update your local wiki! Have fun exploring"
 }
 
-function QUESTIONS() {
+function QUESTIONS () {
     echo "[+] What is your class name? It will be found in the MyLabs portal,"
     echo "[+] Look for the targets range domain, example: first-name.sec588.net."
     read -p "You would enter first-name in this prompt: " CLASS
  
     read -p "What is your student number? Numbers only please : " STUNUM
     
-    STUDENT=student$STUNUM
+    #STUDENT=student$STUNUM
     UPDATE_ENV
     UPDATE_WIKI
     
     echo "[+] We have added new environment variables you should close all terminal windows and open them!"
 }
 
-echo "[+] Student Number currently set to $STUDENT"
+CLASS=$(cat ~/.bashrc | grep CLASS | awk -F= '{ print $2 }' | awk -F\= '{ print $1 }')
+STUDENT=$(cat ~/.bashrc | grep STUDENT | awk -F= '{ print $2}' | sed -s 's/student//')
+
+if [[ -z $CLASS || -z $STUDENT ]]
+then
+    QUESTIONS
+fi
+
+"[+] Student Number currently set to $STUDENT"
 echo "[+] Class name currently set to $CLASS"
 read -p "Do you need to Update your Student Number or Class Name? [Y/N]" UPDATE
 case $UPDATE in 
