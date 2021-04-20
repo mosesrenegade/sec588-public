@@ -64,7 +64,7 @@ function UPDATE_WIKI () {
     then
         STUDENT=student$STUNUM
     fi
-    sed -i "s/\$STUDENT/student$STUDENT/g" ./*.html
+    sed -i "s/\$STUDENT/$STUDENT/g" ./*.html
     sed -i "s/\$CLASS/$CLASS/g" ./*.html
     sudo cp -r . /var/www/html/wiki
     UPDATE_JOHN
