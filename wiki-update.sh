@@ -9,7 +9,7 @@ if [ "$EUID" = 0 ]
 fi
 
 function UPDATE_NGINX () {
-  curl -o /tmp/nginx-default-site https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/nginx-default-site
+  curl -s -o /tmp/nginx-default-site https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/nginx-default-site
   if ! cmp --silent "/tmp/nginx-default-site" "/etc/nginx/sites-enabled/default"
   then
     sudo mv /tmp/nginx-default-site /etc/nginx/sites-enabled/default
@@ -22,7 +22,7 @@ function UPDATE_JOHN () {
   # Only for G01
   if [ ! -f /opt/john/john.sh ]
   then
-    curl https://media.githubusercontent.com/media/mosesrenegade/sec588-public/master/john.tar.gz --output /tmp/john.tar.gz
+    curl -s https://media.githubusercontent.com/media/mosesrenegade/sec588-public/master/john.tar.gz --output /tmp/john.tar.gz
     tar -vxzf /tmp/john.tar.gz 
     sudo mv john /opt/john
     sudo chown -R sec588:sec588 /opt/john
@@ -32,7 +32,7 @@ function UPDATE_JOHN () {
 }
 
 function UPDATE_WIKI () {
-    curl -o /tmp/wiki-update.sh https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/wiki-update.sh
+    curl -s -o /tmp/wiki-update.sh https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/wiki-update.sh
     if ! cmp --silent "/tmp/wiki-update.sh" "/opt/wiki/wiki-update.sh"
     then
       mv /opt/wiki/wiki-update.sh /opt/wiki/wiki-update.old
