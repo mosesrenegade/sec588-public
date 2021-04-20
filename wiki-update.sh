@@ -60,6 +60,10 @@ function UPDATE_WIKI () {
     rm -Rf *.html
     git reset --hard
     git pull
+    if  [[ ! -z $STUNUM ]] 
+    then
+        STUDENT=student$STUNUM
+    fi
     sed -i "s/\$STUDENT/student$STUDENT/g" ./*.html
     sed -i "s/\$CLASS/$CLASS/g" ./*.html
     sudo cp -r . /var/www/html/wiki
@@ -97,7 +101,9 @@ function QUESTIONS() {
     echo "[+] Look for the targets range domain, example: first-name.sec588.net."
     read -p "You would enter first-name in this prompt: " CLASS
  
-    read -p "What is your student number? Numbers only please : " STUDENT
+    read -p "What is your student number? Numbers only please : " STUNUM
+    
+    STUDENT=student$STUNUM
     UPDATE_ENV
     UPDATE_WIKI
     
