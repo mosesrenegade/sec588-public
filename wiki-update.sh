@@ -113,7 +113,7 @@ function QUESTIONS () {
 CLASS=$(cat ~/.bashrc | grep CLASS | awk -F= '{ print $2 }' | awk -F\= '{ print $1 }')
 STUDENT=$(cat ~/.bashrc | grep STUDENT | awk -F= '{ print $2}' | sed -s 's/student//')
 
-if [[ -z $CLASS || -z $STUDENT ]]
+if [[ -z "$CLASS" || -z "$STUDENT" ]]
 then
     QUESTIONS
 fi
