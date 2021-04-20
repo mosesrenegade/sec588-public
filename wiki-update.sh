@@ -64,6 +64,7 @@ function UPDATE_WIKI () {
     sed -i "s/\$CLASS/$CLASS/g" ./*.html
     sudo cp -r . /var/www/html/wiki
     UPDATE_JOHN
+    UPDATE_NGINX
 }
 
 function UPDATE_ENV() {
