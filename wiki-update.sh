@@ -1,6 +1,8 @@
 #!/bin/bash
 VER=g01
-
+FILE="/home/sec588/.bashrc"
+UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
+    
 if [ "$EUID" = 0 ]
   then echo "Please don't run as root or sudo!"
   exit
@@ -48,22 +50,7 @@ function UPDATE_WIKI () {
     then
         sed -i "s/  IdentityFile \/home\/sec588\/.ssh\/day4/  #IdentityFile \/home\/sec588\/.ssh\/day4/g" "$SSH_CONFIG"
     fi
-    #if [ -z $CLASS ]
-    #then
-    #    CLASS=$(cat ~/.bashrc | grep CLASS | awk -F= '{ print $2 }' | awk -F\= '{ print $1 }')
-    #fi
-    #if [ -z $STUDENT ]
-    #then
-    #   STUDENT=$(cat ~/.bashrc | grep STUDENT | awk -F= '{ print $2}' | sed -s 's/student//')
-    #fi
-    cd /opt/wiki/sec588-labs-$VER
-    rm -Rf *.html
-    git reset --hard
-    git pull
-    #if  [[ ! -z $STUNUM ]] 
-    #then
-    #    STUDENT=student$STUNUM
-    #fi
+    
     sed -i "s/\$STUDENT/$STUDENT/g" ./*.html
     sed -i "s/\$CLASS/$CLASS/g" ./*.html
     sudo cp -r . /var/www/html/wiki
@@ -72,20 +59,22 @@ function UPDATE_WIKI () {
 }
 
 function UPDATE_ENV() {
-    FILE="/home/sec588/.bashrc"
-    UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
-    if grep -q "CLASS" "$FILE"
+    if [ -f "$FILE"]
     then
-        sed -i '/CLASS=/d' $FILE
+      if grep -q "CLASS" "$FILE"
+      then
+          sed -i '/CLASS=/d' $FILE
+      fi
+      if grep -q "STUDENT" "$FILE"
+      then
+          sed -i '/STUDENT=/d' $FILE
+      fi
+      if grep -q "UA" "$FILE"
+      then
+          sed -i '/UA=/d' $FILE
+      fi
     fi
-    if grep -q "STUDENT" "$FILE"
-    then
-        sed -i '/STUDENT=/d' $FILE
-    fi
-    if grep -q "UA" "$FILE"
-    then
-        sed -i '/UA=/d' $FILE
-    fi
+    
     echo "export CLASS=\"$CLASS\"" >> $FILE
     echo "export STUDENT=\"$STUDENT\"" >> $FILE
     echo "export UA=\"$UA\"" >> $FILE
@@ -110,8 +99,8 @@ function QUESTIONS () {
     echo "[+] We have added new environment variables you should close all terminal windows and open them!"
 }
 
-CLASS=$(cat ~/.bashrc | grep CLASS | awk -F= '{ print $2 }' | awk -F\= '{ print $1 }')
-STUDENT=$(cat ~/.bashrc | grep STUDENT | awk -F= '{ print $2}')
+CLASS=$(if [ -f "$FILE" ]; then cat $FILE | grep CLASS | awk -F= '{ print $2 }' | awk -F\= '{ print $1 }'; fi )
+STUDENT=$(if [ -f "$FILE" ]; then cat $FILE | grep STUDENT | awk -F= '{ print $2}'; fi )
 
 if [[ -z "$CLASS" || -z "$STUDENT" ]]
 then
