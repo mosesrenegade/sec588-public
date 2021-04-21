@@ -102,8 +102,8 @@ function QUESTIONS () {
     echo "[+] We have added new environment variables you should close all terminal windows and open them!"
 }
 
-CLASS=$(if [ -f "$FILE" ]; then cat $FILE | grep CLASS | awk -F= '{ print $2 }' | awk -F\= '{ print $1 }'; fi )
-STUDENT=$(if [ -f "$FILE" ]; then cat $FILE | grep STUDENT | awk -F= '{ print $2}'; fi )
+CLASS=$(if [ -f "$FILE" ]; then cat $FILE | grep CLASS | awk -F= '{ print $2 }' | awk -F\= '{ print $1 }' | sed -e 's/^"//' -e 's/"$//'; fi )
+STUDENT=$(if [ -f "$FILE" ]; then cat $FILE | grep STUDENT | awk -F= '{ print $2}' | sed -e 's/^"//' -e 's/"$//'; fi )
 
 if [[ -z "$CLASS" || -z "$STUDENT" ]]
 then
