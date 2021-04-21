@@ -114,8 +114,6 @@ else
     read -p "Do you need to Update your Student Number or Class Name? [y/N]" UPDATE
     case $UPDATE in 
         [Yy]* ) QUESTIONS;;
-        #[Nn]* ) UPDATE_WIKI;;
-        #* ) echo "Please answer Y or N.";;
         * ) UPDATE_WIKI;;
     esac
 
