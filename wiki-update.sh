@@ -111,11 +111,12 @@ then
 else
     echo "[+] Student Number currently set to $STUDENT"
     echo "[+] Class name currently set to $CLASS"
-    read -p "Do you need to Update your Student Number or Class Name? [Y/N]" UPDATE
+    read -p "Do you need to Update your Student Number or Class Name? [y/N]" UPDATE
     case $UPDATE in 
         [Yy]* ) QUESTIONS;;
-        [Nn]* ) UPDATE_WIKI;;
-        * ) echo "Please answer Y or N.";;
+        #[Nn]* ) UPDATE_WIKI;;
+        #* ) echo "Please answer Y or N.";;
+        * ) UPDATE_WIKI;;
     esac
 
 fi
