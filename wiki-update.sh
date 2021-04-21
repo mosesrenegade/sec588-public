@@ -90,8 +90,8 @@ function HELP () {
 
 function QUESTIONS () {
     echo "[+] What is your class name? It will be found in the MyLabs portal,"
-    echo "[+] Look for the targets range domain, example: first-name.sec588.net."
-    read -p "You would enter first-name in this prompt: " CLASS
+    echo "[+] Look for the targets range domain, example: pickle-orchid.sec588.net."
+    read -p "You would enter pickle-orchid in this prompt: " CLASS
  
     read -p "What is your student number? Numbers only please : " STUNUM
     
