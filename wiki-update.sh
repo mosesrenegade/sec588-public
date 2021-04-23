@@ -8,6 +8,15 @@ if [ "$EUID" = 0 ]
   exit
 fi
 
+function UPDATE_RSAJOIN () {
+  curl -o /tmp/rsajoin.sh https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/rsajoin.sh
+  if ! cmp --silent "/tmp/rsajoin.sh" "/home/sec588/Coursefiles/SampleScripts/rsajoin.sh"
+  then
+    mv /tmp/rsajoin.sh /home/sec588/Coursefiles/SampleScripts/rsajoin.sh
+    chmod a+x /home/sec588/Coursefiles/SampleScripts/rsajoin.sh
+  fi
+}
+
 function UPDATE_NGINX () {
   curl -s -o /tmp/nginx-default-site https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/nginx-default-site
   if ! cmp --silent "/tmp/nginx-default-site" "/etc/nginx/sites-enabled/default"
@@ -60,6 +69,7 @@ function UPDATE_WIKI () {
     sudo cp -r . /var/www/html/wiki
     UPDATE_JOHN
     UPDATE_NGINX
+    UPDATE_RSAJOIN
 }
 
 function UPDATE_ENV() {
