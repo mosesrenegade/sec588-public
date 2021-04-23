@@ -32,12 +32,20 @@ function UPDATE_JOHN () {
   if [ ! -f /opt/john/john.sh ]
   then
     echo "[+] Fixing John the Ripper"
-    curl -s https://media.githubusercontent.com/media/mosesrenegade/sec588-public/master/john.tar.gz --output /tmp/john.tar.gz
+    
+    if [ ! -f /tmp/john.tar.gz ]
+    then 
+        "[+] John is not on disk let's update it"
+        curl -s https://media.githubusercontent.com/media/mosesrenegade/sec588-public/master/john.tar.gz --output /tmp/john.tar.gz
+    fi
+
     tar -zxf /tmp/john.tar.gz 
     sudo rm -Rf /opt/john
     sudo mv john /opt
     sudo chown -R sec588:sec588 /opt/john
     sudo ln -s /opt/john/john.sh /opt/bin/john
+    
+    echo "[+] Removing John, if this gives and error please ignore it, john was already removed."
     sudo apt remove john -y
   fi
 }
