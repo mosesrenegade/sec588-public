@@ -29,7 +29,7 @@ function UPDATE_NGINX () {
 
 function UPDATE_JOHN () {
   # Only for G01
-  if [ ! -f "/opt/john/john.sh" ]
+  if [ ! -f /opt/john/john.sh ]
   then
     echo "[+] Fixing John the Ripper"
     curl -s https://media.githubusercontent.com/media/mosesrenegade/sec588-public/master/john.tar.gz --output /tmp/john.tar.gz
