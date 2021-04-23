@@ -17,6 +17,14 @@ function UPDATE_RSAJOIN () {
   fi
 }
 
+function UPDATE_LIGHTSHELL () {
+  curl -o /tmp/lightshell.php https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/lightshell.php
+  if ! cmp --silent "/tmp/lightshell.php" "/opt/php-webshell/code/lightshell.php"
+  then
+    mv /tmp/lightshell.php /opt/php-webshell/code/lightshell.php
+  fi
+}
+
 function UPDATE_NGINX () {
   curl -s -o /tmp/nginx-default-site https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/nginx-default-site
   if ! cmp --silent "/tmp/nginx-default-site" "/etc/nginx/sites-enabled/default"
@@ -79,6 +87,7 @@ function UPDATE_WIKI () {
     UPDATE_JOHN
     UPDATE_NGINX
     UPDATE_RSAJOIN
+    UPDATE_LIGHTSHELL
 }
 
 function UPDATE_ENV() {
