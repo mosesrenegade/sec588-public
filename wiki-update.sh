@@ -34,6 +34,7 @@ function UPDATE_JOHN () {
     echo "[+] Fixing John the Ripper"
     curl -s https://media.githubusercontent.com/media/mosesrenegade/sec588-public/master/john.tar.gz --output /tmp/john.tar.gz
     tar -zxf /tmp/john.tar.gz 
+    sudo rm /opt/john
     sudo mv john /opt
     sudo chown -R sec588:sec588 /opt/john
     sudo ln -s /opt/john/john.sh /opt/bin/john
