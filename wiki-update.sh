@@ -77,7 +77,7 @@ function UPDATE_WIKI () {
     then
         sed -i "s/  IdentityFile \/home\/sec588\/.ssh\/day4/  #IdentityFile \/home\/sec588\/.ssh\/day4/g" "$SSH_CONFIG"
     fi
-    [+] Working on updates, please wait...
+    echo "[+] Working on updates, please wait..."
     cd /opt/wiki/sec588-labs-$VER
     rm -Rf *.html
     git reset --hard
