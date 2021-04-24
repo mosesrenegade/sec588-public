@@ -9,7 +9,7 @@ if [ "$EUID" = 0 ]
 fi
 
 function UPDATE_RSAJOIN () {
-  curl -o /tmp/rsajoin.sh https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/rsajoin.sh
+  curl -s -o /tmp/rsajoin.sh https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/rsajoin.sh
   if ! cmp --silent "/tmp/rsajoin.sh" "/home/sec588/Coursefiles/SampleScripts/rsajoin.sh"
   then
     mv /tmp/rsajoin.sh /home/sec588/Coursefiles/SampleScripts/rsajoin.sh
@@ -18,7 +18,7 @@ function UPDATE_RSAJOIN () {
 }
 
 function UPDATE_LIGHTSHELL () {
-  curl -o /tmp/lightshell.php https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/lightshell.php
+  curl -s -o /tmp/lightshell.php https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/lightshell.php
   if ! cmp --silent "/tmp/lightshell.php" "/opt/php-webshell/code/lightshell.php"
   then
     mv /tmp/lightshell.php /opt/php-webshell/code/lightshell.php
@@ -77,6 +77,7 @@ function UPDATE_WIKI () {
     then
         sed -i "s/  IdentityFile \/home\/sec588\/.ssh\/day4/  #IdentityFile \/home\/sec588\/.ssh\/day4/g" "$SSH_CONFIG"
     fi
+    [+] Working on updates, please wait...
     cd /opt/wiki/sec588-labs-$VER
     rm -Rf *.html
     git reset --hard
