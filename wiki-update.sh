@@ -80,7 +80,7 @@ function UPDATE_WIKI () {
     cd /opt/wiki/sec588-labs-$VER
     rm -Rf *.html
     git reset --hard
-    git pull
+    git pull --quiet > /tmp/git.log
     sed -i "s/\$STUDENT/$STUDENT/g" ./*.html
     sed -i "s/\$CLASS/$CLASS/g" ./*.html
     sudo cp -r . /var/www/html/wiki
