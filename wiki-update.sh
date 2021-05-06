@@ -17,6 +17,15 @@ function UPDATE_RSAJOIN () {
   fi
 }
 
+function UPDATE_PACU () {
+  curl -s -o /tmp/pacu.py https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/pacu.py
+  if ! cmp --silent "/tmp/pacu.py" "/opt/pacu/pacu.py"
+  then
+    sudo mv /tmp/pacu.py /opt/pacu/pacu.py
+    chown sec588:sec588 /opt/pacu/pacu.py
+  fi
+}
+
 function UPDATE_LIGHTSHELL () {
   curl -s -o /tmp/lightshell.php https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/lightshell.php
   if ! cmp --silent "/tmp/lightshell.php" "/opt/php-webshell/code/lightshell.php"
@@ -89,6 +98,7 @@ function UPDATE_WIKI () {
     UPDATE_NGINX
     UPDATE_RSAJOIN
     UPDATE_LIGHTSHELL
+    UPDATE_PACU
 }
 
 function UPDATE_ENV() {
