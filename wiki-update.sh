@@ -2,7 +2,11 @@
 VER=g01
 FILE="/home/sec588/.bashrc"
 UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
-    
+CURDIR=`pwd`
+
+# Moving to /opt/wiki
+cd /opt/wiki
+
 if [ "$EUID" = 0 ]
   then echo "Please don't run as root or sudo!"
   exit
@@ -159,3 +163,4 @@ else
 
 fi
 
+cd $CURDIR
