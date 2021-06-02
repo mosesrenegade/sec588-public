@@ -137,8 +137,14 @@ function QUESTIONS () {
     echo "[+] Look for the targets range domain, example: pickle-orchid.sec588.net."
     read -p "You would enter pickle-orchid in this prompt: " CLASS
  
-    read -p "What is your student number? Numbers only please : " STUNUM
-    
+    TEMPNUM=`echo $((1000 + $RANDOM % 8999))`
+
+    read -p "[+] Do you want us to set your student number to $TEMPNUM? [y/N]" NEWNUM
+    case $NEWNUM in 
+        [Yy]* ) STUNUM=$TEMPNUM;;
+        * ) read -p "What is your student number? Numbers only please : " STUNUM;;
+    esac
+        
     STUDENT=student$STUNUM
     UPDATE_ENV
     UPDATE_WIKI
