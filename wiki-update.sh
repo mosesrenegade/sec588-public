@@ -56,7 +56,7 @@ function UPDATE_JOHN () {
     
     if [ ! -f /tmp/john.tar.gz ]
     then 
-        "[+] John is not on disk let's update it"
+        echo "[+] John is not on disk let's update it"
         curl -s https://media.githubusercontent.com/media/mosesrenegade/sec588-public/master/john.tar.gz --output /tmp/john.tar.gz
     fi
 
