@@ -12,6 +12,10 @@ if [ "$EUID" = 0 ]
   exit
 fi
 
+function UPDATE_PATTERN () {
+  sed -i 's/GUSTER/GOBUSTER/g' /home/sec588/Coursefiles/wordlists/patterns.txt
+}
+
 function UPDATE_RSAJOIN () {
   curl -s -o /tmp/rsajoin.sh https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/rsajoin.sh
   if ! cmp --silent "/tmp/rsajoin.sh" "/home/sec588/Coursefiles/SampleScripts/rsajoin.sh"
@@ -103,6 +107,7 @@ function UPDATE_WIKI () {
     UPDATE_RSAJOIN
     UPDATE_LIGHTSHELL
     UPDATE_PACU
+    UPDATE_PATTERN
 }
 
 function UPDATE_ENV() {
