@@ -52,6 +52,24 @@ function UPDATE_NGINX () {
   fi
 }
 
+function UPDATE_MASS () {
+  MASVER=$(masscan --version | grep 1.0.3)
+  if [[ ! -z "$MASVER" ]]
+  then
+      if [ ! -f /tmp/masscan ]
+      then
+        cd /tmp
+        git clone https://github.com/robertdavidgraham/masscan --quiet >> /tmp/git.log
+      fi
+
+    sudo mv /usr/bin/masscan /usr/bin/masscan-old
+    cd /tmp/masscan
+    echo "Please wait a momment"
+    make >/dev/null
+    sudo make install >/dev/null
+  fi
+}
+
 function UPDATE_JOHN () {
   # Only for G01
   if [ ! -f /opt/john/john.sh ]
@@ -108,6 +126,7 @@ function UPDATE_WIKI () {
     UPDATE_LIGHTSHELL
     UPDATE_PACU
     UPDATE_PATTERN
+    UPDATE_MASS
 }
 
 function UPDATE_ENV() {
