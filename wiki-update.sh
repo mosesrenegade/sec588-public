@@ -127,6 +127,16 @@ function UPDATE_WIKI () {
     UPDATE_PACU
     UPDATE_PATTERN
     UPDATE_MASS
+    NGROK_CHECK
+}
+
+function NGROK_CHECK() {
+    NGROK_VER=$(ngrok version)
+
+    if $NGROK_VER == 'ngrok version 3.0.2' 
+    then
+        ngrok config upgrade 2&>/dev/null
+    fi
 }
 
 function UPDATE_ENV() {
