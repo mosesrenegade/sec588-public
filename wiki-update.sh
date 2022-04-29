@@ -97,7 +97,7 @@ function UPDATE_NMAP() {
     curl -s -o /tmp/redis-info.nse https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/redis-info.nse
     if ! cmp --silent "/tmp/redis-info.nse" "/usr/local/share/nmap/scripts/redis-info.nse"
     then
-      cp /tmp/redis-info.nse /usr/local/share/nmap/scripts/redis-info.nse
+      sudo cp /tmp/redis-info.nse /usr/local/share/nmap/scripts/redis-info.nse
     fi
 }
 
