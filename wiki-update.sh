@@ -14,6 +14,8 @@ fi
 
 function UPDATE_PATTERN () {
   sed -i 's/GUSTER/GOBUSTER/g' /home/sec588/Coursefiles/wordlists/patterns.txt
+  cp /home/sec588/Coursefiles/wordlists/subdomains-5k.txt /home/sec588/Coursefiles/wordlists/.subdomains-5k.txt.orig
+  curl -s -o /home/sec588/Coursefiles/wordlists/subdomains-5k.txt https://raw.githubusercontent.com/mosesrenegade/sec588-public/master/subdomains-5k.txt
 }
 
 function UPDATE_RSAJOIN () {
